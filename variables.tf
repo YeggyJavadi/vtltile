@@ -30,7 +30,7 @@ variable "processor_mode" {
 variable "system_type" {
   type        = string
   default     = "s922"
-  description = "The type of system on which to create the StorSafe  instance: 's922' or 'e980' for Power 9; 's1022' or 'e1050' for Power 10 if present in the selected datacenter"
+  description = "The type of the system on which to create the StorSafe VM based on the server sizing: Power 9 models S922 or E980, Power 10 models S1022 or E1050, Power 11 models S1122, S1124, L1122, L1124, E1150, E1180. For Power machines make sure they exist on the datacenter that you selected in CRN. The system type Ennn should be used for a large system that requires more memory to hold a deduplication repository of around 400 TB."
 }
 variable "storage_type" {
   type        = string
@@ -72,7 +72,16 @@ variable "network_3_ip" {
   default     = ""
   description = "Specific IP address to assign to the third network rather than automatic assignment within the IP range"
 }
-variable "placement_group" {
+variable "network_4" {
+  type        = string
+  default     = ""
+  description = "The forth network ID or name to assign to the StorSafe instance, as defined for the selected Power Systems Virtual Server CRN"
+}
+variable "network_4_ip" {
+  type        = string
+  default     = ""
+  description = "Specific IP address to assign to the forth network rather than automatic assignment within the IP range"
+}variable "placement_group" {
   type        = string
   default     = ""
   description = "The server placement group name where the StorSafe instance will be placed, as defined for the selected Power Systems Virtual Server CRN"
