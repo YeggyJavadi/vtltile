@@ -27,7 +27,11 @@ data "ibm_pi_network" "network_3" {
   pi_cloud_instance_id = local.pid
   pi_network_name      = var.network_3
 }
-locals {
+data "ibm_pi_network" "network_4" {
+  count = length(var.network_4) > 0 ? 1 : 0
+  pi_cloud_instance_id = local.pid
+  pi_network_name      = var.network_4
+}locals {
   stock_image_name = "VTL-FalconStor-11_16_001"
   catalog_image = [for x in data.ibm_pi_catalog_images.catalog_images.images : x if x.name == local.stock_image_name]
   private_image = [for x in data.ibm_pi_images.cloud_instance_images.image_info : x if x.name == local.stock_image_name]
@@ -73,9 +77,13 @@ resource "ibm_pi_instance" "instance" {
       network_id = data.ibm_pi_network.network_3[0].id
       ip_address = length(var.network_3_ip) > 0 ? var.network_3_ip : ""
     }
-  }
+ dynamic "pi_network" {
+    for_each = var.network_4 == "" ? [] : [1]
+    content {
+      network_id = data.ibm_pi_network.network_4[0].id
+      ip_address = length(var.network_4_ip) > 0 ? var.network_4_ip : ""
+    } }
 }
-
 resource "ibm_pi_volume" "configuration_volume"{
   pi_volume_size       = var.volume_configuration_size
   pi_volume_name       = "${var.instance_name}_configuration-volume"
