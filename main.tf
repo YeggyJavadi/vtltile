@@ -78,12 +78,13 @@ resource "ibm_pi_instance" "instance" {
       network_id = data.ibm_pi_network.network_3[0].id
       ip_address = length(var.network_3_ip) > 0 ? var.network_3_ip : ""
     }
+}
  dynamic "pi_network" {
     for_each = var.network_4 == "" ? [] : [1]
     content {
       network_id = data.ibm_pi_network.network_4[0].id
       ip_address = length(var.network_4_ip) > 0 ? var.network_4_ip : ""
-    } }
+    } 
 }
 resource "ibm_pi_volume" "configuration_volume"{
   pi_volume_size       = var.volume_configuration_size
