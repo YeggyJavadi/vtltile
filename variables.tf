@@ -30,7 +30,7 @@ variable "processor_mode" {
 variable "system_type" {
   type        = string
   default     = ""
-  description = "The type of the system on which to create the StorSafe VM based on the server sizing: Power 9 models S922 or E980, Power 10 models S1022 or E1050, Power 11 models S1122, S1124, L1122, L1124, E1150, E1180. For Power machines make sure they exist on the datacenter that you selected in CRN. The system type Ennn should be used for a large system that requires more memory to hold a deduplication repository of around 400 TB."
+  description = "The type of the system on which to create the StorSafe VM based on the server sizing: Power 9 models s922 or e980, Power 10 models s1022 or e1050, Power 11 models s1122, s1124, l1122, l1124, e1150, e1180. For Power machines make sure they exist on the datacenter that you selected in CRN. The system type Ennn should be used for a large system that requires more memory to hold a deduplication repository of around 400 TB."
 }
 variable "storage_type" {
   type        = string
